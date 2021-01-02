@@ -13,10 +13,28 @@ export default class Feedback extends Component {
      bad: 0
     }
 
+    total = 0;
+
+    perc = 0;
+
     handleClick = (e) => {
+        if (e.target === e.currentTarget) return;
         this.setState(state => ({
             [e.target.dataset.stat]: Number(state[e.target.dataset.stat]) + 1,
         }))
+    }
+
+    countTotalFeedback() {
+        this.total = 0;
+        for (let val in this.state) {
+            this.total += this.state[val];
+        }
+        return this.total;
+    }
+
+    countPositiveFeedbackPercentage() {
+        this.perc = Math.round(Number((this.state.good / (this.total - this.state.neutral)) || 0) * 100);
+        return `${this.perc}%`;
     }
 
     render() {
@@ -29,7 +47,7 @@ export default class Feedback extends Component {
                 <FeedbackBtn data-stat="bad" children="Bad"/>
             </FeedbackBtnField>
             <Title title="Statistics" fontSize="18"/>
-            <FeedbackList stats={this.state}/>
+            <FeedbackList stats={this.state} total={this.countTotalFeedback()} perc={this.countPositiveFeedbackPercentage()}/>
         </FeedbackCard>
       )
     }

@@ -15,8 +15,12 @@ const FeedbackItem = ({statName, val}) => (
   <FeedbackLi>{statName}: <StatValue children={val}/></FeedbackLi>
 )
 
-const FeedbackList = ({ stats }) => {
-  const newStats = [{statName: 'good', value: stats.good}, {statName: 'neutral', value: stats.neutral}, {statName: 'bad', value: stats.bad}];
+const FeedbackList = ({ stats, total, perc }) => {
+  const newStats = [{ statName: 'Good', value: stats.good },
+    { statName: 'Neutral', value: stats.neutral },
+    { statName: 'Bad', value: stats.bad },
+    { statName: 'Total', value: total },
+  { statName: 'Positive feedback', value: perc }];
     return (<FeedbackUl>
       {newStats.map((stat, index) => (<FeedbackItem key={index} statName={stat.statName} val={stat.value} />))}
     </FeedbackUl>)
