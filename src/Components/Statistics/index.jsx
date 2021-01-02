@@ -27,7 +27,7 @@ const Statistics= ({ good, neutral, bad, total, positivePercentage}) => {
     <FeedbackItem statName="Neutral" val={neutral} />
     <FeedbackItem statName="Bad" val={bad} />
     <FeedbackItem statName="Total" val={total} />
-    <FeedbackItem statName="Positive feedback" val={positivePercentage} />
+    <FeedbackItem statName="Positive feedback" val={positivePercentage + '%'} />
     </FeedbackUl>)
 }
 
