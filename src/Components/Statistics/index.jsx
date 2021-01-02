@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const StatValue = styled.span`
   font-weight: bold;
@@ -15,6 +16,11 @@ const FeedbackItem = ({statName, val}) => (
   <FeedbackLi>{statName}: <StatValue children={val}/></FeedbackLi>
 )
 
+FeedbackItem.propTypes = {
+  statName: PropTypes.string.isRequired,
+  val: PropTypes.number.isRequired,
+}
+
 const Statistics= ({ good, neutral, bad, total, positivePercentage}) => {
   return (<FeedbackUl>
     <FeedbackItem statName="Good" val={good} />
@@ -23,7 +29,6 @@ const Statistics= ({ good, neutral, bad, total, positivePercentage}) => {
     <FeedbackItem statName="Total" val={total} />
     <FeedbackItem statName="Positive feedback" val={positivePercentage} />
     </FeedbackUl>)
-  
 }
 
 export default Statistics;

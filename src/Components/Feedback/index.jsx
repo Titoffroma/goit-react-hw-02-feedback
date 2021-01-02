@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
 import FeedbackOptions from '../FeedbackOptions';
 import FeedbackBtn from '../FeedbackBtn';
 import Statistics from '../Statistics';
