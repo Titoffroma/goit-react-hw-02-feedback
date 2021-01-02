@@ -5,6 +5,7 @@ import FeedbackBtn from '../FeedbackBtn';
 import Statistics from '../Statistics';
 import FeedbackCard from '../FeedbackCard';
 import Section from '../Section';
+import Notification from '../Notification';
 
 export default class Feedback extends Component {
     state = {
@@ -59,7 +60,7 @@ export default class Feedback extends Component {
                     <Statistics good={this.state.good} neutral={this.state.neutral}
                         bad={this.state.bad} total={this.total}
                         positivePercentage={this.perc} /> :
-                    "No feedback given"
+                    <Notification message="No feedback given"/>
                 }
             </Section>
         </FeedbackCard>
