@@ -1,4 +1,4 @@
-import Feedback from "./Components/Feedback";
+import Feedback from "../Feedback";
 
 function App() {
   return <Feedback />;

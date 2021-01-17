@@ -1,34 +1,30 @@
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { StatValue, FeedbackLi, FeedbackUl } from './StatisticsStyled';
 
-const StatValue = styled.span`
-  font-weight: bold;
-`
-const FeedbackLi = styled.li`
-  color: #212121;
-  font-size: 14px;
-  padding: 2px 0;
-`
-const FeedbackUl = styled.ul`
- list-style-type: none;
-`
-const FeedbackItem = ({statName, val}) => (
-  <FeedbackLi>{statName}: <StatValue children={val}/></FeedbackLi>
-)
+const FeedbackItem = ({ statName, val }) => (
+  <FeedbackLi>
+    {statName}: <StatValue>{val}</StatValue>
+  </FeedbackLi>
+);
 
 FeedbackItem.propTypes = {
   statName: PropTypes.string.isRequired,
-  val: PropTypes.number.isRequired,
-}
+  val: PropTypes.string.isRequired,
+};
 
-const Statistics= ({ good, neutral, bad, total, positivePercentage}) => {
-  return (<FeedbackUl>
-    <FeedbackItem statName="Good" val={good} />
-    <FeedbackItem statName="Neutral" val={neutral} />
-    <FeedbackItem statName="Bad" val={bad} />
-    <FeedbackItem statName="Total" val={total} />
-    <FeedbackItem statName="Positive feedback" val={positivePercentage + '%'} />
-    </FeedbackUl>)
-}
+const Statistics = ({ good, neutral, bad, total, positivePercentage }) => {
+  return (
+    <FeedbackUl>
+      <FeedbackItem statName="Good" val={`${good}`} />
+      <FeedbackItem statName="Neutral" val={`${neutral}`} />
+      <FeedbackItem statName="Bad" val={`${bad}`} />
+      <FeedbackItem statName="Total" val={`${total}`} />
+      <FeedbackItem
+        statName="Positive feedback"
+        val={`${positivePercentage} %`}
+      />
+    </FeedbackUl>
+  );
+};
 
 export default Statistics;
