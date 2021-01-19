@@ -11,23 +11,14 @@ export default class Feedback extends Component {
     good: 0,
     neutral: 0,
     bad: 0,
-    total: 0,
-    percent: 0,
   };
 
   countTotalFeedback() {
-    return this.state.good + this.state.neutral + this.state.bad + 1;
+    return this.state.good + this.state.neutral + this.state.bad;
   }
 
-  countPositiveFeedbackPercentage(state, value) {
-    let good = state.good;
-    let neutral = state.neutral;
-    if (value === 'good') good++;
-    if (value === 'neutral') return state.percent;
-    const dif = state.total + 1 - neutral;
-    if (!dif) return 0;
-    const result = (good / dif) * 100;
-    return Math.round(result);
+  countPositiveFeedbackPercentage(total) {
+    return Math.round((this.state.good / (total - this.state.neutral)) * 100);
   }
 
   handleClick = e => {
@@ -35,16 +26,14 @@ export default class Feedback extends Component {
     this.setState(state => {
       return {
         [e.target.dataset.stat]: Number(state[e.target.dataset.stat]) + 1,
-        total: this.countTotalFeedback(),
-        percent: this.countPositiveFeedbackPercentage(
-          state,
-          e.target.dataset.stat,
-        ),
       };
     });
   };
 
   render() {
+    const total = this.countTotalFeedback();
+    const percent = this.countPositiveFeedbackPercentage(total);
+    const { good, neutral, bad } = this.state;
     return (
       <Div>
         <FeedbackCard>
@@ -52,13 +41,13 @@ export default class Feedback extends Component {
             <FeedbackOptions callback={this.handleClick} />
           </Section>
           <Section title="Statistics">
-            {this.state.total ? (
+            {total ? (
               <Statistics
-                good={this.state.good}
-                neutral={this.state.neutral}
-                bad={this.state.bad}
-                total={this.state.total}
-                positivePercentage={this.state.percent}
+                good={good}
+                neutral={neutral}
+                bad={bad}
+                total={total}
+                positivePercentage={percent}
               />
             ) : (
               <Notification message="No feedback given" />
