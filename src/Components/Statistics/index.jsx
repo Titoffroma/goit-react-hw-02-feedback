@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { StatValue, FeedbackLi, FeedbackUl } from './StatisticsStyled';
+import Notification from '../Notification';
 
 const FeedbackItem = ({ statName, val }) => (
   <FeedbackLi>
@@ -13,7 +14,7 @@ FeedbackItem.propTypes = {
 };
 
 const Statistics = ({ good, neutral, bad, total, positivePercentage }) => {
-  return (
+  return total ? (
     <FeedbackUl>
       <FeedbackItem statName="Good" val={`${good}`} />
       <FeedbackItem statName="Neutral" val={`${neutral}`} />
@@ -24,6 +25,8 @@ const Statistics = ({ good, neutral, bad, total, positivePercentage }) => {
         val={`${positivePercentage} %`}
       />
     </FeedbackUl>
+  ) : (
+    <Notification message="No feedback given" />
   );
 };
 
