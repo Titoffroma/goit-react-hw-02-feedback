@@ -17,14 +17,16 @@ export default class App extends Component {
   }
 
   countPositiveFeedbackPercentage(total) {
-    return Math.round((this.state.good / (total - this.state.neutral)) * 100);
+    return (
+      Math.round((this.state.good / (total - this.state.neutral)) * 100) || 0
+    );
   }
 
   handleClick = e => {
     if (e.target === e.currentTarget) return;
-    this.setState(state => {
+    this.setState(prevState => {
       return {
-        [e.target.dataset.stat]: Number(state[e.target.dataset.stat]) + 1,
+        [e.target.dataset.stat]: prevState[e.target.dataset.stat] + 1,
       };
     });
   };
